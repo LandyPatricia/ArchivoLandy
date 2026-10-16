@@ -1,0 +1,50 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="wax-drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.4" />
+    </filter>
+    <filter id="wax-bevel">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
+      <feSpecularLighting in="blur" surfaceScale="2" specularConstant="0.8" specularExponent="20" lighting-color="#155730" result="spec">
+        <fePointLight x="20" y="20" z="40" />
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specOut" />
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+    </filter>
+    <filter id="wax-inner">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.6" />
+    </filter>
+    <filter id="gold-bevel">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.5" result="blur" />
+      <feSpecularLighting in="blur" surfaceScale="1" specularConstant="1" specularExponent="30" lighting-color="#fff" result="spec">
+        <fePointLight x="30" y="30" z="20" />
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specOut" />
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+      <feDropShadow dx="0" dy="1" stdDeviation="0.5" flood-color="#000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <path
+    d="M 50 4 C 65 3, 75 8, 85 16 C 92 22, 98 35, 96 48 C 95 55, 98 65, 92 78 C 85 90, 68 97, 50 96 C 32 95, 18 90, 8 78 C 3 65, 5 50, 6 42 C 7 30, 12 18, 25 10 C 35 4, 42 5, 50 4 Z"
+    fill="#0d3b1f"
+    filter="url(#wax-drop-shadow) url(#wax-bevel)"
+  />
+  <circle cx="50" cy="50" r="35" fill="#092915" filter="url(#wax-inner)" />
+  <circle cx="50" cy="50" r="35" fill="none" stroke="#155730" stroke-width="1" opacity="0.6" />
+
+  <g transform="translate(18 18) scale(0.64)" fill="#d6a644" filter="url(#gold-bevel)">
+    <path d="M 49 68 C 50 80, 48 90, 48 96 C 50 95, 52 80, 51 68 Z" />
+    <path d="M 50 82 C 60 78, 80 65, 75 50 C 65 52, 55 65, 50 78 Z" />
+    <path d="M 49 88 C 40 85, 20 75, 25 60 C 35 62, 45 72, 49 84 Z" />
+    <path d="M 50 58 C 40 75, 60 75, 50 58 Z" />
+    <path d="M 50 58 C 15 65, 15 35, 50 58 Z" />
+    <path d="M 50 58 C 85 65, 85 35, 50 58 Z" />
+    <path d="M 50 58 C 25 25, 45 15, 50 58 Z" />
+    <path d="M 50 58 C 75 25, 55 15, 50 58 Z" />
+    <path d="M 50 58 C 52 30, 48 10, 52 -5" stroke="#d6a644" stroke-width="3" fill="none" />
+    <circle cx="52" cy="-6" r="3" />
+    <circle cx="48" cy="-2" r="2.5" />
+    <circle cx="56" cy="-2" r="2.5" />
+  </g>
+</svg>

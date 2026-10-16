@@ -1,0 +1,348 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-hibisco: var(--hibisco);
+  --color-amarillo: var(--amarillo);
+  --color-carbon: var(--carbon);
+  --color-crema: var(--crema);
+  --color-oro: var(--oro);
+  --color-arena: var(--arena);
+  --color-verde: var(--verde);
+  --color-verde-hoja: var(--verde-hoja);
+  --color-turquesa: var(--turquesa);
+  --color-magenta: var(--magenta);
+  --font-serif: "Fraunces", "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Caveat", "Segoe Script", cursive;
+}
+
+/* Accesibilidad visual: crece la letra, no la página.
+   ---------------------------------------------------------------------------
+   Esto movía `font-size` de <html>. Como el diseño entero está en `rem`
+   —márgenes, huecos, anchos, altos, radios—, crecía todo a la vez: era el zoom
+   del navegador con otro nombre. Las tarjetas se separaban, la cabecera dejaba
+   de caber y se leía igual de mal, solo que más lejos. Quien necesita letra
+   grande quiere la letra grande, no la página grande.
+
+   Tailwind 4 publica su escala tipográfica como variables —`--text-sm` y
+   compañía— y cada utilidad `text-*` la lee con `var()`. Redefinirlas aquí
+   agranda solo la letra. `--spacing`, de donde salen paddings y huecos, no se
+   toca; los cortes por ancho tampoco, porque van en `rem` sobre una raíz que
+   ahora se queda quieta en 16 px.
+
+   `--escala-letra` es el multiplicador, y lo pone el atributo `data-font-size`
+   que escribe el control de accesibilidad. */
+
+:root {
+  --escala-letra: 1;
+}
+html[data-font-size="grande"] {
+  --escala-letra: 1.16;
+}
+html[data-font-size="muy-grande"] {
+  --escala-letra: 1.32;
+}
+html[data-font-size="enorme"] {
+  --escala-letra: 1.5;
+}
+
+/* La escala de Tailwind, multiplicada. Los `--text-*--line-height` que la
+   acompañan son proporciones sin unidad, así que siguen a la letra solos. */
+:root {
+  --text-xs: calc(0.75rem * var(--escala-letra));
+  --text-sm: calc(0.875rem * var(--escala-letra));
+  --text-base: calc(1rem * var(--escala-letra));
+  --text-lg: calc(1.125rem * var(--escala-letra));
+  --text-xl: calc(1.25rem * var(--escala-letra));
+  --text-2xl: calc(1.5rem * var(--escala-letra));
+  --text-3xl: calc(1.875rem * var(--escala-letra));
+  --text-4xl: calc(2.25rem * var(--escala-letra));
+  --text-5xl: calc(3rem * var(--escala-letra));
+  --text-6xl: calc(3.75rem * var(--escala-letra));
+  --text-7xl: calc(4.5rem * var(--escala-letra));
+  --text-8xl: calc(6rem * var(--escala-letra));
+  --text-9xl: calc(8rem * var(--escala-letra));
+}
+
+/* Los rótulos escritos a pelo en píxeles —`text-[11px]` y sus hermanos— no
+   pasan por la escala de Tailwind: llevan el número metido en la regla. Y son
+   justo los más chicos del sitio, los que más falta hace agrandar, así que se
+   reescalan uno por uno. Si aparece otro tamaño suelto hay que añadirlo aquí;
+   lo suyo, de todos modos, es usar las utilidades normales. */
+.text-\[6px\] {
+  font-size: calc(6px * var(--escala-letra));
+}
+.text-\[7px\] {
+  font-size: calc(7px * var(--escala-letra));
+}
+.text-\[8px\] {
+  font-size: calc(8px * var(--escala-letra));
+}
+.text-\[9px\] {
+  font-size: calc(9px * var(--escala-letra));
+}
+.text-\[10px\] {
+  font-size: calc(10px * var(--escala-letra));
+}
+.text-\[11px\] {
+  font-size: calc(11px * var(--escala-letra));
+}
+.text-\[13px\] {
+  font-size: calc(13px * var(--escala-letra));
+}
+.text-\[0\.8rem\] {
+  font-size: calc(0.8rem * var(--escala-letra));
+}
+.text-\[6rem\] {
+  font-size: calc(6rem * var(--escala-letra));
+}
+@media (width >= 40rem) {
+  .sm\:text-\[11px\] {
+    font-size: calc(11px * var(--escala-letra));
+  }
+}
+@media (width >= 48rem) {
+  .md\:text-\[3\.6rem\] {
+    font-size: calc(3.6rem * var(--escala-letra));
+  }
+  .md\:text-\[8rem\] {
+    font-size: calc(8rem * var(--escala-letra));
+  }
+  .md\:text-\[10px\] {
+    font-size: calc(10px * var(--escala-letra));
+  }
+}
+@media (width >= 64rem) {
+  .lg\:text-\[10px\] {
+    font-size: calc(10px * var(--escala-letra));
+  }
+}
+
+html[data-font-size="grande"],
+html[data-font-size="muy-grande"],
+html[data-font-size="enorme"] {
+  overflow-wrap: break-word;
+}
+
+:root {
+  --radius: 0.85rem;
+
+  /* Marca — El Archivo de Mis Flores
+     Paleta trópico/feria: viva, cálida, festiva. Reemplaza el tema oscuro
+     editorial anterior (fondo carbón casi negro) por el mediodía tropical
+     de la Feria Tabasco: fondo crema/marfil, verdes de selva y cacao,
+     magenta de fiesta, turquesa de río y dorado de luces de feria. */
+  --hibisco: #e8112d; /* rojo hibisco / achiote — flor emblema */
+  --amarillo: #ffc300; /* amarillo mango / plátano */
+  --carbon: #0e3d36; /* verde-tinta muy oscuro — antes casi-negro, ahora acento oscuro cálido (footer, CTAs) */
+  --crema: #fdfbf6; /* blanco cálido casi neutro — el color lo dan los acentos, no el fondo */
+  --oro: #d4a017; /* dorado de luces de feria */
+  --arena: #f6efdc; /* marfil tenue — fondos secundarios de sección, apenas tintado */
+  --verde: #0f5132; /* verde selva/cacao — texto de marca, encabezados */
+  --verde-hoja: #2e7d4f; /* verde hoja más claro — iconografía, acentos */
+  --turquesa: #00a6a6; /* turquesa río Grijalva — divisores, detalles */
+  --magenta: #e31c79; /* magenta de fiesta — llamados a la acción */
+
+  /* Tema CLARO por defecto: mediodía tropical, no archivo de museo oscuro. */
+  --background: var(--crema);
+  --foreground: var(--verde);
+  --card: #fff8e6;
+  --card-foreground: var(--verde);
+  --popover: #fff8e6;
+  --popover-foreground: var(--verde);
+  --primary: var(--magenta);
+  --primary-foreground: #fffaf3;
+  --secondary: var(--verde);
+  --secondary-foreground: var(--crema);
+  --muted: var(--arena);
+  --muted-foreground: #4d5f54; /* verde-tinta atenuado, legible sobre crema/marfil */
+  --accent: var(--amarillo);
+  --accent-foreground: var(--carbon);
+  --destructive: var(--hibisco);
+  --destructive-foreground: #fffaf3;
+  --border: color-mix(in oklch, var(--oro) 35%, transparent);
+  --input: color-mix(in oklch, var(--oro) 35%, transparent);
+  --ring: var(--magenta);
+  --chart-1: var(--hibisco);
+  --chart-2: var(--amarillo);
+  --chart-3: var(--verde-hoja);
+  --chart-4: var(--turquesa);
+  --chart-5: var(--oro);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--verde);
+  --sidebar-primary: var(--magenta);
+  --sidebar-primary-foreground: #fffaf3;
+  --sidebar-accent: var(--arena);
+  --sidebar-accent-foreground: var(--verde);
+  --sidebar-border: color-mix(in oklch, var(--oro) 35%, transparent);
+  --sidebar-ring: var(--magenta);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: calc(1rem * var(--escala-letra));
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+  font-weight: 600;
+}
+
+/* Ornamentos */
+.rule-oro {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--oro);
+}
+.rule-oro::before,
+.rule-oro::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* Fondo "mediodía tropical": textura de papel/tela cálida sobre el crema —
+   calor de ámbar y magenta insinuado, más un grano fino tipo papel amate
+   para que nunca se sienta como un fondo plano de landing genérica. */
+.paper {
+  background-image:
+    radial-gradient(
+      1100px 380px at 8% -8%,
+      color-mix(in oklch, var(--magenta) 10%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1100px 420px at 108% 8%,
+      color-mix(in oklch, var(--hibisco) 10%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      1000px 500px at 50% 115%,
+      color-mix(in oklch, var(--turquesa) 12%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(color-mix(in oklch, var(--carbon) 7%, transparent) 1px, transparent 1.6px),
+    radial-gradient(color-mix(in oklch, var(--oro) 14%, transparent) 1px, transparent 1.6px);
+  background-size:
+    auto,
+    auto,
+    auto,
+    24px 24px,
+    24px 24px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    12px 12px;
+  background-color: var(--background);
+}
+
+.textura-papel {
+  background-image:
+    radial-gradient(color-mix(in oklch, var(--carbon) 7%, transparent) 1px, transparent 1.6px),
+    radial-gradient(color-mix(in oklch, var(--oro) 16%, transparent) 1px, transparent 1.6px);
+  background-size: 24px 24px, 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* Marco de doble filete dorado.
+   OJO: la linea interior se dibuja con `box-shadow: inset`, y una sombra
+   interior se pinta POR DEBAJO del contenido del elemento. Un hijo a sangre
+   —una foto que llena la caja— la tapa y el marco parece desbordado.
+   Quien meta una imagen a sangre dentro de `.frame-oro` debe dejarle 6px de
+   `padding` (`p-1.5`) y redondear el hijo. Con padding propio ya no hay
+   problema, que es el caso de casi todas las tarjetas. */
+.frame-oro {
+  border: 2px solid color-mix(in oklch, var(--oro) 65%, transparent);
+  box-shadow:
+    inset 0 0 0 4px var(--card),
+    inset 0 0 0 6px color-mix(in oklch, var(--oro) 50%, transparent);
+}
+.badge-status {
+  font-size: calc(0.65rem * var(--escala-letra));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Franja tipo listón textil bordado: separador festivo entre secciones,
+   inspirado en el bordado floral de los trajes típicos tabasqueños. */
+.listón-textil {
+  height: 14px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--hibisco) 0 18px,
+    var(--amarillo) 18px 36px,
+    var(--verde-hoja) 36px 54px,
+    var(--turquesa) 54px 72px,
+    var(--magenta) 72px 90px
+  );
+  box-shadow: 0 2px 0 0 color-mix(in oklch, var(--carbon) 25%, transparent);
+}
+
+/* Corte diagonal: rompe el patrón de secciones apiladas en renglones rectos.
+   Se aplica al fondo de una sección para que la siguiente "muerda" su borde
+   inferior en ángulo, en vez de una línea horizontal limpia. */
+.corte-diagonal-abajo {
+  clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%);
+}
+.corte-diagonal-arriba {
+  clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* "Alfiler" tipo corcho, para tarjetas de fotos con aire de recuerdo pinchado. */
+.alfiler {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #fff6dd, var(--oro) 70%);
+  box-shadow: 0 2px 4px rgba(14, 61, 54, 0.35);
+  z-index: 2;
+}

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx prettier *)",
+      "Bash(curl -s http://localhost:3000/ -o \"C:/Users/DEFAUL~2/AppData/Local/Temp/claude/c--Users-defaultuser0-OneDrive-Escritorio-Ideas-disruptivas-Proyectos-Archivo-de-mis-flores/39aeeff7-60d0-4eb5-a105-51a7404fce9c/scratchpad/home.html\" -w \"HTTP %{http_code}  %{size_download} bytes\\\\n\")",
+      "Bash(curl -s http://localhost:3000/api/patrimonios/personajes -w \"\\\\nHTTP %{http_code}\\\\n\")",
+      "Bash(curl -s -o /dev/null -w \"home HTTP %{http_code}\\\\n\" http://localhost:3000/)"
+    ]
+  }
+}

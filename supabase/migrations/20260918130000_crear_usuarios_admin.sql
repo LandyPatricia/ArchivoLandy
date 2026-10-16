@@ -1,0 +1,10 @@
+-- Creación de usuarios por administradores
+-- ---------------------------------------------------------------------------
+-- El panel administrativo ahora permite que las administradoras den de alta
+-- cuentas para colaboradores y usuarios del archivo desde /admin/usuarios.
+--
+-- La creación de la cuenta se procesa en el servidor a través de la ruta
+-- `/api/admin/crear-usuario` utilizando el cliente administrativo de Supabase
+-- (`supabase.auth.admin.createUser`) previa verificación de la sesión y del
+-- rol 'admin' del usuario solicitante, autoconfirmando el correo para acceso
+-- inmediato y asignando el rol inicial correspondiente en `public.user_roles`.
